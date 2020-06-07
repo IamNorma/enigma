@@ -1,10 +1,10 @@
 require 'date'
 
 class Shift
-  attr_reader :date 
+  attr_reader :date
 
   def initialize
-    @date = Date.today.strftime("%d%m%Y")
+    @date = Date.today.strftime("%d%m%y")
   end
 
   def create_random_number
@@ -19,5 +19,9 @@ class Shift
       C: random_number[2..3].to_i,
       D: random_number[3..4].to_i
     }
+  end
+
+  def squared_date
+    date.to_i ** 2
   end
 end

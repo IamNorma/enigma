@@ -14,7 +14,7 @@ class ShiftTest < Minitest::Test
     Date.stubs(:today).returns(Date.new(2020, 06, 06))
     shift = Shift.new
 
-    assert_equal "06062020", shift.date 
+    assert_equal "060620", shift.date
   end
 
   def test_it_can_create_random_digits
@@ -31,5 +31,12 @@ class ShiftTest < Minitest::Test
 
     shift.expects(:create_random_number).returns(number)
     assert_equal expected, shift.create_keys
+  end
+
+  def test_squared_date
+    shift = Shift.new
+    shift.stubs(:date).returns("040620")
+
+    assert_equal 1649984400, shift.squared_date
   end
 end
