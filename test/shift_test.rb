@@ -10,6 +10,13 @@ class ShiftTest < Minitest::Test
     assert_instance_of Shift, shift
   end
 
+  def test_it_has_date
+    Date.stubs(:today).returns(Date.new(2020, 06, 06))
+    shift = Shift.new
+
+    assert_equal "06062020", shift.date 
+  end
+
   def test_it_can_create_random_digits
     shift = Shift.new
 

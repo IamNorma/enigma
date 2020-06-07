@@ -1,4 +1,11 @@
+require 'date'
+
 class Shift
+  attr_reader :date 
+
+  def initialize
+    @date = Date.today.strftime("%d%m%Y")
+  end
 
   def create_random_number
     rand(99999).to_s.rjust(5,'0')
