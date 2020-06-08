@@ -1,6 +1,6 @@
 require 'date'
 
-class Shift
+class Algorithm
   attr_reader :date, :character_set
 
   def initialize

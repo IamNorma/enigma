@@ -17,6 +17,12 @@ class ShiftTest < Minitest::Test
     assert_equal "060620", shift.date
   end
 
+  def test_it_starts_with_character_set
+    shift = Shift.new
+
+    assert_equal ("a".."z").to_a << " ", shift.character_set
+  end
+
   def test_it_can_create_random_digits
     shift = Shift.new
 
@@ -66,5 +72,42 @@ class ShiftTest < Minitest::Test
     shift.expects(:create_offsets).returns(offsets)
     shift.expects(:create_keys).returns(keys)
     assert_equal expected, shift.final_shifts
+  end
+
+  def test_it_can_split_message
+    shift = Shift.new
+    expected = ["h", "i", ",", " ", "w", "o", "r", "l", "d"]
+
+    assert_equal expected, shift.split_lowercase_message("hI, WoRlD")
+  end
+
+  def test_it_can_create_character_set_hash
+    shift = Shift.new
+    expected = {
+      "a"=>0, "b"=>1, "c"=>2, "d"=>3, "e"=>4, "f"=>5, "g"=>6,
+      "h"=>7, "i"=>8, "j"=>9, "k"=>10, "l"=>11, "m"=>12, "n"=>13,
+      "o"=>14, "p"=>15, "q"=>16, "r"=>17, "s"=>18, "t"=>19, "u"=>20,
+      "v"=>21, "w"=>22, "x"=>23, "y"=>24, "z"=>25, " "=>26
+    }
+
+    assert_equal expected, shift.character_set_hash
+  end
+
+  def test_it_can_encrypt_message
+    shift = Shift.new
+    shifts = {A: 6, B: 3, C: 1, D: 5}
+
+    shift.stubs(:final_shifts).returns(shifts)
+    assert_equal "nhmqucxtxoe", shift.encrypt("Hello World")
+    assert_equal "nhmqu,aauumi!", shift.encrypt("Hello, World!")
+  end
+
+  def test_it_can_decrypt_message
+    shift = Shift.new
+    shifts = {A: 6, B: 3, C: 1, D: 5}
+
+    shift.stubs(:final_shifts).returns(shifts)
+    assert_equal "hello world", shift.decrypt("nhmqucxtxoe")
+    assert_equal "hello, world!", shift.decrypt("nhmqu,aauumi!")
   end
 end
