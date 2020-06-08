@@ -56,4 +56,15 @@ class ShiftTest < Minitest::Test
     shift.expects(:last_four_digits).returns(number)
     assert_equal expected, shift.create_offsets
   end
+
+  def test_it_can_create_final_shifts
+    shift = Shift.new
+    keys = {A: 02, B: 27, C: 71, D: 15}
+    offsets = {A: 4, B: 4, C: 0, D: 0}
+    expected = {A: 6, B: 31, C: 71, D: 15}
+
+    shift.expects(:create_offsets).returns(offsets)
+    shift.expects(:create_keys).returns(keys)
+    assert_equal expected, shift.final_shifts
+  end
 end

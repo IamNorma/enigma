@@ -39,4 +39,12 @@ class Shift
       D: four_digits[3].to_i
     }
   end
+
+  def final_shifts
+    keys = create_keys
+    offsets = create_offsets
+    keys.merge(offsets) do |key, key_value, offset_value|
+      key_value + offset_value
+    end
+  end
 end
