@@ -53,27 +53,30 @@ class Shift
     message.downcase.split("")
   end
 
-  def encrypt(message)
-    ready = split_lowercase_message(message)
-    character_with_index = @character_set.map.with_index do |character, index|
+  def character_set_hash
+    @character_set.map.with_index do |character, index|
       [character, index]
     end.to_h
+  end
+
+  def encrypt(message)
+    ready = split_lowercase_message(message)
     encrypted = []
     split_message_with_index = ready.map.with_index do |character, index|
       if @character_set.include?(character) == false
         encrypted << character
       elsif index % 4 == 0
         a_shift = @character_set.rotate(final_shifts[:A])
-        encrypted << a_shift[character_with_index[character]]
+        encrypted << a_shift[character_set_hash[character]]
       elsif index % 4 == 1
         b_shift = @character_set.rotate(final_shifts[:B])
-        encrypted << b_shift[character_with_index[character]]
+        encrypted << b_shift[character_set_hash[character]]
       elsif index % 4 == 2
         c_shift = @character_set.rotate(final_shifts[:C])
-        encrypted << c_shift[character_with_index[character]]
+        encrypted << c_shift[character_set_hash[character]]
       elsif index % 4 == 3
         d_shift = @character_set.rotate(final_shifts[:D])
-        encrypted << d_shift[character_with_index[character]]
+        encrypted << d_shift[character_set_hash[character]]
       end
     end
     encrypted.join("")
