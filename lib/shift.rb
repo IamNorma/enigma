@@ -29,4 +29,14 @@ class Shift
     squared = squared_date
     squared.to_s[-4..-1].to_i
   end
+
+  def create_offsets
+    four_digits = last_four_digits.to_s
+    {
+      A: four_digits[0].to_i,
+      B: four_digits[1].to_i,
+      C: four_digits[2].to_i,
+      D: four_digits[3].to_i
+    }
+  end
 end

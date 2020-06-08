@@ -45,6 +45,15 @@ class ShiftTest < Minitest::Test
     squared_date = 1649984400
     shift.stubs(:squared_date).returns(squared_date)
 
-    assert_equal 4400, shift.last_four_digits 
+    assert_equal 4400, shift.last_four_digits
+  end
+
+  def test_it_can_create_offsets
+    shift = Shift.new
+    number = 4400
+    expected = {A: 4, B: 4, C: 0, D: 0}
+
+    shift.expects(:last_four_digits).returns(number)
+    assert_equal expected, shift.create_offsets
   end
 end
