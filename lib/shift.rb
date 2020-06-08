@@ -81,4 +81,27 @@ class Shift
     end
     encrypted.join("")
   end
+
+  def decrypt(message)
+    message_to_decrypt = split_lowercase_message(message)
+    decrypted = []
+    message_to_decrypt.map.with_index do |character, index|
+      if @character_set.include?(character) == false
+        decrypted << character
+      elsif index % 4 == 0
+        a_shift = @character_set.rotate(-final_shifts[:A])
+        decrypted << a_shift[character_set_hash[character]]
+      elsif index % 4 == 1
+        b_shift = @character_set.rotate(-final_shifts[:B])
+        decrypted << b_shift[character_set_hash[character]]
+      elsif index % 4 == 2
+        c_shift = @character_set.rotate(-final_shifts[:C])
+        decrypted << c_shift[character_set_hash[character]]
+      elsif index % 4 == 3
+        d_shift = @character_set.rotate(-final_shifts[:D])
+        decrypted << d_shift[character_set_hash[character]]
+      end
+    end
+    decrypted.join("")
+  end
 end
