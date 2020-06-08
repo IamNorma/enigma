@@ -74,11 +74,11 @@ class ShiftTest < Minitest::Test
     assert_equal expected, shift.final_shifts
   end
 
-  def test_it_can_lowercase
+  def test_it_can_split_message
     shift = Shift.new
+    expected = ["h", "i", ",", " ", "w", "o", "r", "l", "d"]
 
-    assert_equal "hello world", shift.lowercase("HEllo WorlD")
-    assert_equal "hello, world!", shift.lowercase("HEllo, WorlD!")
+    assert_equal expected, shift.split_lowercase_message("hI, WoRlD")
   end
 
   def test_it_can_encrypt_message
