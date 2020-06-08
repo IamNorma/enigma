@@ -39,4 +39,12 @@ class ShiftTest < Minitest::Test
 
     assert_equal 1649984400, shift.squared_date
   end
+
+  def test_it_can_get_last_four_digits
+    shift = Shift.new
+    squared_date = 1649984400
+    shift.stubs(:squared_date).returns(squared_date)
+
+    assert_equal 4400, shift.last_four_digits 
+  end
 end

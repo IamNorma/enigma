@@ -24,4 +24,9 @@ class Shift
   def squared_date
     date.to_i ** 2
   end
+
+  def last_four_digits
+    squared = squared_date
+    squared.to_s[-4..-1].to_i
+  end
 end
