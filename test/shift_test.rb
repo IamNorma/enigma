@@ -20,7 +20,7 @@ class ShiftTest < Minitest::Test
   def test_it_starts_with_character_set
     shift = Shift.new
 
-    assert_equal ("a".."z").to_a << " ", shift.character_set 
+    assert_equal ("a".."z").to_a << " ", shift.character_set
   end
 
   def test_it_can_create_random_digits
@@ -74,7 +74,15 @@ class ShiftTest < Minitest::Test
     assert_equal expected, shift.final_shifts
   end
 
+  def test_it_can_lowercase
+    shift = Shift.new
+
+    assert_equal "hello world", shift.lowercase("HEllo WorlD")
+    assert_equal "hello, world!", shift.lowercase("HEllo, WorlD!")
+  end
+
   def test_it_can_encrypt_message
+    skip
     shift = Shift.new
 
     assert_equal "lakf alkdj", shift.encrypt("Hello World")

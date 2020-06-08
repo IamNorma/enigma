@@ -49,8 +49,15 @@ class Shift
     end
   end
 
+  def lowercase(message)
+    message.downcase
+  end
+
   def encrypt(message)
-    new = message.downcase
-    new.split("")
+    lowercase = message.downcase
+    split_message = lowercase.split("")
+    split_message.map.with_index do |character, index|
+      binding.pry
+    end
   end
 end
