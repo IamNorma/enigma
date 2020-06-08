@@ -1,10 +1,11 @@
 require 'date'
 
 class Shift
-  attr_reader :date
+  attr_reader :date, :character_set
 
   def initialize
     @date = Date.today.strftime("%d%m%y")
+    @character_set = ("a".."z").to_a << " "
   end
 
   def create_random_number
@@ -46,5 +47,10 @@ class Shift
     keys.merge(offsets) do |key, key_value, offset_value|
       key_value + offset_value
     end
+  end
+
+  def encrypt(message)
+    new = message.downcase
+    new.split("")
   end
 end

@@ -17,6 +17,12 @@ class ShiftTest < Minitest::Test
     assert_equal "060620", shift.date
   end
 
+  def test_it_starts_with_character_set
+    shift = Shift.new
+
+    assert_equal ("a".."z").to_a << " ", shift.character_set 
+  end
+
   def test_it_can_create_random_digits
     shift = Shift.new
 
@@ -66,5 +72,11 @@ class ShiftTest < Minitest::Test
     shift.expects(:create_offsets).returns(offsets)
     shift.expects(:create_keys).returns(keys)
     assert_equal expected, shift.final_shifts
+  end
+
+  def test_it_can_encrypt_message
+    shift = Shift.new
+
+    assert_equal "lakf alkdj", shift.encrypt("Hello World")
   end
 end
