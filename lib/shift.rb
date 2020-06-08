@@ -54,10 +54,28 @@ class Shift
   end
 
   def encrypt(message)
-    lowercase(message)
-    split_message = lowercase.split("")
-    split_message.map.with_index do |character, index|
-      binding.pry
+    ready = split_lowercase_message(message)
+    character_with_index = @character_set.map.with_index do |character, index|
+      [character, index]
+    end.to_h
+    encrypted = []
+    split_message_with_index = ready.map.with_index do |character, index|
+      if @character_set.include?(character) == false
+        encrypted << character
+      elsif index % 4 == 0
+        a_shift = @character_set.rotate(final_shifts[:A])
+        encrypted << a_shift[character_with_index[character]]
+      elsif index % 4 == 1
+        b_shift = @character_set.rotate(final_shifts[:B])
+        encrypted << b_shift[character_with_index[character]]
+      elsif index % 4 == 2
+        c_shift = @character_set.rotate(final_shifts[:C])
+        encrypted << c_shift[character_with_index[character]]
+      elsif index % 4 == 3
+        d_shift = @character_set.rotate(final_shifts[:D])
+        encrypted << d_shift[character_with_index[character]]
+      end
     end
+    encrypted.join("")
   end
 end

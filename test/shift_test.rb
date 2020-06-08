@@ -82,9 +82,11 @@ class ShiftTest < Minitest::Test
   end
 
   def test_it_can_encrypt_message
-    skip
     shift = Shift.new
+    shifts = {A: 6, B: 3, C: 1, D: 5}
 
-    assert_equal "lakf alkdj", shift.encrypt("Hello World")
+    shift.stubs(:final_shifts).returns(shifts)
+    assert_equal "nhmqucxtxoe", shift.encrypt("Hello World")
+    assert_equal "nhmqu,aauumi!", shift.encrypt("Hello, World!")
   end
 end
