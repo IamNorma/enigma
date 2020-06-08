@@ -60,9 +60,9 @@ class Shift
   end
 
   def encrypt(message)
-    ready = split_lowercase_message(message)
+    message_to_encrypt = split_lowercase_message(message)
     encrypted = []
-    split_message_with_index = ready.map.with_index do |character, index|
+    message_to_encrypt.map.with_index do |character, index|
       if @character_set.include?(character) == false
         encrypted << character
       elsif index % 4 == 0
