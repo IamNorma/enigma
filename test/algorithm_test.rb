@@ -1,7 +1,5 @@
 require './test/test_helper'
 require './lib/algorithm'
-require 'mocha/minitest'
-require 'pry'
 
 class AlgorithmTest < Minitest::Test
   def test_it_exists
