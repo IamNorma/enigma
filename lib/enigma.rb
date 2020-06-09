@@ -17,7 +17,7 @@ class Enigma
 
   def decrypt(message, key = algorithm.random_number, date = algorithm.date)
     {
-     encryption: algorithm.decrypt(message, key, date),
+     decryption: algorithm.decrypt(message, key, date),
      key: key,
      date: date
     }
